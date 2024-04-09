@@ -40,8 +40,7 @@ def list_cameras_darwin():
     # pylint: disable=consider-using-with
     flout, _ = subprocess.Popen(
         "system_profiler -xml SPCameraDataType",
-        shell=True,
-        stdout=subprocess.PIPE,
+        shell=False, stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     ).communicate()
 
