@@ -11,12 +11,11 @@ See pg.examples.aliens for some prettyier code.
 """
 import sys
 import os
-
-from random import randint
 from time import time
 from typing import List
 
 import pygame as pg
+import secrets
 
 main_dir = os.path.split(os.path.abspath(__file__))[0]
 data_dir = os.path.join(main_dir, "data")
@@ -103,10 +102,10 @@ class Thingy(pg.sprite.DirtySprite):
         pg.sprite.DirtySprite.__init__(self)
         self.image = Thingy.images[0]
         self.rect = self.image.get_rect()
-        self.rect.x = randint(0, screen_dims[0])
-        self.rect.y = randint(0, screen_dims[1])
+        self.rect.x = secrets.SystemRandom().randint(0, screen_dims[0])
+        self.rect.y = secrets.SystemRandom().randint(0, screen_dims[1])
         # self.vel = [randint(-10, 10), randint(-10, 10)]
-        self.vel = [randint(-1, 1), randint(-1, 1)]
+        self.vel = [secrets.SystemRandom().randint(-1, 1), secrets.SystemRandom().randint(-1, 1)]
         self.dirty = 2
 
     def update(self):
@@ -125,8 +124,8 @@ class Static(pg.sprite.DirtySprite):
         pg.sprite.DirtySprite.__init__(self)
         self.image = Static.images[0]
         self.rect = self.image.get_rect()
-        self.rect.x = randint(0, 3 * screen_dims[0] // 4)
-        self.rect.y = randint(0, 3 * screen_dims[1] // 4)
+        self.rect.x = secrets.SystemRandom().randint(0, 3 * screen_dims[0] // 4)
+        self.rect.y = secrets.SystemRandom().randint(0, 3 * screen_dims[1] // 4)
 
 
 def main(

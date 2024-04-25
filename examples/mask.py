@@ -38,10 +38,10 @@ one or more image file names as command line arguments.
 """
 
 import os
-import random
 import sys
 
 import pygame as pg
+import secrets
 
 
 class Sprite:
@@ -145,12 +145,12 @@ def main(*args):
         j = i % len(images)
         sprite = Sprite(
             pos=(
-                random.uniform(0, screen_size[0]),
-                random.uniform(0, screen_size[1]),
+                secrets.SystemRandom().uniform(0, screen_size[0]),
+                secrets.SystemRandom().uniform(0, screen_size[1]),
             ),
             vel=(
-                random.uniform(-5, 5),
-                random.uniform(-5, 5),
+                secrets.SystemRandom().uniform(-5, 5),
+                secrets.SystemRandom().uniform(-5, 5),
             ),
             surface=images[j],
             mask=masks[j],
