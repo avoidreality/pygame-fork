@@ -5,6 +5,7 @@ import os
 import sys
 import subprocess
 import json
+from security import safe_command
 
 
 class Dependency:
@@ -60,7 +61,7 @@ def conan_install(force_build=True):
 
     print(cmd)
     try:
-        return subprocess.call(cmd)
+        return safe_command.run(subprocess.call, cmd)
     finally:
         os.chdir(os.path.join('..', '..'))
 
