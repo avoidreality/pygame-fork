@@ -12,6 +12,7 @@ Experimental!
 import os
 import pygame as pg
 from pygame._sdl2 import Window, Texture, Image, Renderer, get_drivers, messagebox
+import secrets
 
 data_dir = os.path.join(os.path.split(os.path.abspath(__file__))[0], "data")
 
@@ -26,8 +27,6 @@ pg.key.set_repeat(1000, 10)
 for driver in get_drivers():
     print(driver)
 
-import random
-
 try:
     answer = messagebox(
         "I will open two windows! Continue?",
@@ -37,7 +36,7 @@ try:
         return_button=0,
         escape_button=1,
     )
-    if answer == 1 or (answer == 2 and random.random() < 0.5):
+    if answer == 1 or (answer == 2 and secrets.SystemRandom().random() < 0.5):
         import sys
 
         sys.exit(0)
@@ -122,9 +121,9 @@ while running:
         for x_ in range(streamtex.width // 4):
             for y_ in range(streamtex.height // 4):
                 newcol = (
-                    random.randint(0, 255),
-                    random.randint(0, 255),
-                    random.randint(0, 255),
+                    secrets.SystemRandom().randint(0, 255),
+                    secrets.SystemRandom().randint(0, 255),
+                    secrets.SystemRandom().randint(0, 255),
                     255,
                 )
                 area = (4 * x_, 4 * y_, 4, 4)

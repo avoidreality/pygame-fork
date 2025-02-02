@@ -10,7 +10,7 @@ Keyboard Controls:
 * Press R to restart the demo
 """
 import pygame as pg
-import random
+import secrets
 
 MIN_SPEED = 0.25
 MAX_SPEED = 5
@@ -40,9 +40,9 @@ def reset():
     balls = []
     for x in range(MAX_BALLS):
         pos = pg.Vector2(
-            random.randint(0, int(SCREEN_SIZE.x)), random.randint(0, int(SCREEN_SIZE.y))
+            secrets.SystemRandom().randint(0, int(SCREEN_SIZE.x)), secrets.SystemRandom().randint(0, int(SCREEN_SIZE.y))
         )
-        speed = random.uniform(MIN_SPEED, MAX_SPEED)
+        speed = secrets.SystemRandom().uniform(MIN_SPEED, MAX_SPEED)
 
         b = Ball(pos, speed)
         balls.append(b)
