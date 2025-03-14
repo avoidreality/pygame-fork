@@ -107,9 +107,9 @@ def writesetupfile(deps, basepath, additional_lines):
         line = ''
         while line.find('#--StartConfig') == -1:
             newsetup.write(line)
-            line = origsetup.readline()
+            line = origsetup.readline(5_000_000)
         while line.find('#--EndConfig') == -1:
-            line = origsetup.readline()
+            line = origsetup.readline(5_000_000)
 
         if basepath:
             newsetup.write('BASE = ' + basepath + '\n')
