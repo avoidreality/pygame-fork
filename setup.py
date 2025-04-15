@@ -9,6 +9,7 @@
 import glob
 import platform
 import sysconfig
+from security import safe_command
 
 with open('README.rst', encoding='utf-8') as readme:
     LONG_DESCRIPTION = readme.read()
@@ -865,7 +866,7 @@ class TestCommand(Command):
         runs the tests with default options.
         '''
         import subprocess
-        return subprocess.call([sys.executable, os.path.join('test', '__main__.py')])
+        return safe_command.run(subprocess.call, [sys.executable, os.path.join('test', '__main__.py')])
 
 
 class LintFormatCommand(Command):
@@ -944,7 +945,7 @@ class LintFormatCommand(Command):
         for linter, option in commands.items():
             print(" ".join([linter] + option))
             check_linter_exists(linter)
-            result = subprocess.run([linter] + option)
+            result = safe_command.run(subprocess.run, [linter] + option)
             if result.returncode:
                 msg = f"'{linter}' failed."
                 msg += " Please run: python setup.py format" if linter in formatters else ""
@@ -994,7 +995,7 @@ class DocsCommand(Command):
         ]
         if self.fullgeneration:
             command_line.append('full_generation')
-        if subprocess.call(command_line) != 0:
+        if safe_command.run(subprocess.call, command_line) != 0:
             raise SystemExit("Failed to build documentation")
 
 
