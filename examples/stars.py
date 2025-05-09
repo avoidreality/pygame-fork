@@ -10,9 +10,9 @@ the starfield by leftclicking in the window. This example show
 the basics of creating a window, simple pixel plotting, and input
 event management.
 """
-import random
 import math
 import pygame as pg
+import secrets
 
 # constants
 WINSIZE = [640, 480]
@@ -22,9 +22,9 @@ NUMSTARS = 150
 
 def init_star(steps=-1):
     "creates new star values"
-    dir = random.randrange(100000)
+    dir = secrets.SystemRandom().randrange(100000)
     steps_velocity = 1 if steps == -1 else steps * 0.09
-    velmult = steps_velocity * (random.random() * 0.6 + 0.4)
+    velmult = steps_velocity * (secrets.SystemRandom().random() * 0.6 + 0.4)
     vel = [math.sin(dir) * velmult, math.cos(dir) * velmult]
 
     if steps is None:
@@ -34,8 +34,8 @@ def init_star(steps=-1):
 
 def initialize_stars():
     "creates a new starfield"
-    random.seed()
-    stars = [init_star(steps=random.randint(0, WINCENTER[0])) for _ in range(NUMSTARS)]
+    secrets.SystemRandom().seed()
+    stars = [init_star(steps=secrets.SystemRandom().randint(0, WINCENTER[0])) for _ in range(NUMSTARS)]
     move_stars(stars)
     return stars
 
