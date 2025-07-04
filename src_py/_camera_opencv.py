@@ -10,6 +10,7 @@ import cv2
 import time
 
 import pygame
+import defusedxml.ElementTree
 
 
 def list_cameras():
@@ -35,7 +36,6 @@ def list_cameras():
 
 def list_cameras_darwin():
     import subprocess
-    from xml.etree import ElementTree
 
     # pylint: disable=consider-using-with
     flout, _ = subprocess.Popen(
@@ -48,7 +48,7 @@ def list_cameras_darwin():
     last_text = None
     cameras = []
 
-    for node in ElementTree.fromstring(flout).iterfind("./array/dict/array/dict/*"):
+    for node in defusedxml.ElementTree.fromstring(flout).iterfind("./array/dict/array/dict/*"):
         if last_text == "_name":
             cameras.append(node.text)
         last_text = node.text
