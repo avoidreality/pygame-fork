@@ -3,6 +3,7 @@
 import sys
 import os
 import subprocess
+from security import safe_command
 
 # rst_dir = 'docs'
 # rst_source_dir = os.path.join(rst_dir, 'reST')
@@ -50,7 +51,7 @@ def runit():
         if full_generation_flag:
             subprocess_args.append('-E')
         print("Executing sphinx in subprocess with args:", subprocess_args)
-        return subprocess.run(subprocess_args).returncode
+        return safe_command.run(subprocess.run, subprocess_args).returncode
     except Exception:
         print('---')
         print('Have you installed sphinx?')
