@@ -24,11 +24,11 @@ Controls
 """
 
 import os
-import random
 from typing import List
 
 # import basic pygame modules
 import pygame as pg
+import secrets
 
 # see if we can load more than standard BMP
 if not pg.image.get_extended():
@@ -120,7 +120,7 @@ class Alien(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self, *groups)
         self.image = self.images[0]
         self.rect = self.image.get_rect()
-        self.facing = random.choice((-1, 1)) * Alien.speed
+        self.facing = secrets.choice((-1, 1)) * Alien.speed
         self.frame = 0
         if self.facing < 0:
             self.rect.right = SCREENRECT.right
@@ -345,12 +345,12 @@ def main(winstyle=0):
         # Create new alien
         if alienreload:
             alienreload = alienreload - 1
-        elif not int(random.random() * ALIEN_ODDS):
+        elif not int(secrets.SystemRandom().random() * ALIEN_ODDS):
             Alien(aliens, all, lastalien)
             alienreload = ALIEN_RELOAD
 
         # Drop bombs
-        if lastalien and not int(random.random() * BOMB_ODDS):
+        if lastalien and not int(secrets.SystemRandom().random() * BOMB_ODDS):
             Bomb(lastalien.sprite, all, bombs, all)
 
         # Detect collisions between aliens and players.
